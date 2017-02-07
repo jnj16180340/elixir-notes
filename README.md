@@ -3,6 +3,7 @@
 - [ ] Message passing over a network
     - Raspberry Pi example
 - [ ] MQTT broker example
+- [ ] Some comparisons to nodeJS and other crappy stuff
 
 ### Standard tooling
 Build tool: `mix`
@@ -25,6 +26,8 @@ REPL: `iex`
 - More...
 
 ### Differences and caveats
+- Types can be a little bit weird
+    - **But at least they're not schizophrenic!** 
 - Pattern matching: blah blah
     - Compare to???
 - No `for` loops
