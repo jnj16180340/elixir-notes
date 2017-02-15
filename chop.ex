@@ -1,3 +1,4 @@
+# Thomas "Programming Elixir 1.3" ModulesAndFunctions-6
 defmodule Chop do
     # Another option: Split list into [head | middle (1 or 2 elem) | tail]
     def guess(target, low..high) do
