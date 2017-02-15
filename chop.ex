@@ -1,4 +1,5 @@
 # Thomas "Programming Elixir 1.3" ModulesAndFunctions-6
+# Exercise answers can be found at https://forums.pragprog.com/forums/322
 defmodule Chop do
     # Another option: Split list into [head | middle (1 or 2 elem) | tail]
     def guess(target, low..high) do
@@ -50,4 +51,33 @@ defmodule Chop do
     def fout(g) when is_integer(g) do
         IO.puts("Is it "<>Integer.to_string(g))
     end
+end
+
+# Dave Thomas's answer
+defmodule ChopAnswer do
+  # another way of pattern matching
+  # Use string interpolation instead of concatenation!
+  # that avoids Integer.to_string/1 etc
+  # re: midpoint finding, I'm just stupid
+  def guess(actual, range = low..high) do 
+    guess = div(low+high, 2)
+    IO.puts "Is it #{guess}?"
+    _guess(actual, guess, range)
+  end
+
+  # use pattern matching instead of guard!
+  # style: use _ in private functions
+  defp _guess(actual, actual, _),
+    do: IO.puts "Yes, it's #{actual}"
+  
+  # this is so much simpler
+  # we already know the list midpoint so we don't need to split it
+  # in a separate function!
+  defp _guess(actual, guess,  _low..high)
+    when guess < actual,
+    do: guess(actual, guess+1..high)
+
+  defp _guess(actual, guess,  low.._high) 
+    when guess > actual, 
+    do: guess(actual, low..guess-1)
 end
