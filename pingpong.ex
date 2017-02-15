@@ -45,6 +45,7 @@ end
 
 #Then:
 # `elixirc pingpong.ex`
+# This compiles to ~2.2kb
 # reload `iex` (or `elixir pingpong.ex`)
 
 # Use `spawn/3`, not `spawn/1` (/1 is for anonymous functions)

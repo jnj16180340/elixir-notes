@@ -1,7 +1,7 @@
 ### To do
 - [ ] build tooling, package manager etc demos
 - [ ] Message passing over a network
-    - Raspberry Pi example
+    - Raspberry Pi "cluster" example, maybe blink lights or sth
 - [ ] MQTT broker example
 - [ ] Some comparisons to nodeJS and other crappy stuff
 
@@ -14,8 +14,10 @@ REPL: `iex`
 ### Features
 - Robustness: 
     - 30 years of Erlang (BEAM VM) and OTP (standard library for "telephony")
-    - Used in cell networks, Whatsapp, big 
-
+    - Used in cell networks, Whatsapp, big companies
+    - "Erlang philosophy":
+        - Failures will always happen
+        - The system must never go down
 - The BEAM VM scheduler is really good
 - Hot code loading
 - "Invisible" distributed-ness: Processes are 'location agnostic' apart from bare-metal differences and network latency
@@ -23,11 +25,14 @@ REPL: `iex`
         - `f |> g(y) |> h(y,z)` == `h(g(f(),y),y,z)`
 - Dealing with binary streams and regex-like stuff is really easy
         - EXAMPLES
+- Soft realtime
+    - Explain what this means
 - More...
 
 ### Differences and caveats
-- Types can be a little bit weird
+- Types+syntax can be a little bit weird
     - **But at least they're not schizophrenic!** 
+    - Pick a style and stick to it
 - Pattern matching: blah blah
     - Compare to???
 - No `for` loops

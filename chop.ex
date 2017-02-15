@@ -1,31 +1,52 @@
 defmodule Chop do
-    # :bigger :smaller :equal
-    # Enum.split(1..10,(10-1)/2)
-    
-    # when the range only contains 1 element, that is the answer
+    # Another option: Split list into [head | middle (1 or 2 elem) | tail]
     def guess(target, low..high) do
-        # entry point
-        # idk if float is an issue
-        guess(target, low..high, (high-low)/2)
+        tg = midpoint(low..high)
+        fout(tg)
+        guess(target, low..high, tg)
     end
     def guess(target, low..high, theguess) when theguess==target do
         # the anchor case/ terminating condition
+        IO.puts("#1")
         theguess
+    end
+    def guess(target, low..high, theguess) when low==high do
+        # another anchor case/ terminating condition
+        IO.puts("#2")
+        low
     end
     def guess(target, low..high, theguess) when theguess>target do
         # lower half
+        tg = midpoint(low..high)
+        fout(tg)
+        guess(target, splist(low..high, :lower), tg)
     end
-    def guess(target, low..high, theguess) when theguess==target do
+    def guess(target, low..high, theguess) when theguess<target do
         # upper half
+        tg = midpoint(low..high)
+        fout(tg)
+        guess(target, splist(low..high, :upper), tg)
     end
     
-    
-    
-    def guess(target, low..high, theguess) when rem(high-low,2)==0 do
-        # ODD case, middle is Float.round((high-low)/2)
-        
+    # I really don't wanna handle even/odd length cases!
+    def splist(low..high, :lower) do
+        low..low+div(high-low,2)
     end
-    def guess(target, low..high, theguess) when rem(high-low,2)>0 do
-        # EVEN case, middle is (high-low)/2
+    def splist(low..high, :upper) when high-low==1 do
+        # fuuuuuck me
+        high..high
+    end
+    def splist(low..high, :upper) do
+        (low+div(high-low,2))..high
+    end
+    
+    # find middle element of list
+    def midpoint(low..high) do
+        # general case, ignore lower ones
+        low+div(high-low,2)
+    end
+    
+    def fout(g) when is_integer(g) do
+        IO.puts("Is it "<>Integer.to_string(g))
     end
 end
