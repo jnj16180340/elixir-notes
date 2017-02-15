@@ -1,3 +1,14 @@
+## In this repo
+- `random`: My random crap
+    - `pingpong`: message passing between processes
+
+- `pragprog`: Exercises from Dave Thomas _Programming Elixir 1.3_; annotated with answers found at https://forums.pragprog.com/forums/322
+
+## Dialyzer
+Setup: `dialyzer --build_plt --apps erts kernel stdlib crypto public_key /usr/local/lib/elixir/lib/elixir/ebin/`
+`Wall` equivalent: `dialyzer -Wunderspecs -Wrace_conditions -Werror_handling -Wunmatched_returns Elixir.Pingpong.beam`
+Normal use: `dialyzer $BYTECODE`
+
 ### To do
 - [ ] build tooling, package manager etc demos
 - [ ] Message passing over a network
