@@ -43,7 +43,7 @@ defmodule MyList do
   # remember to include func in recursive call or it will be the default!!!
   def all?([head | tail], func), do: func.(head) && all?(tail, func)
   #each(enum, fun) invokes fun for each item
-  def each(_, func \\ &IO.puts/1)
+  def each(_, func \\ &IO.puts/1) # the / makes kate syntax file glitch out
   def each([head|[]], func) do
     func.(head) # we can't join lines with ;
     :ok
@@ -53,4 +53,8 @@ defmodule MyList do
     each(tail, func)
   end
   # take/2: [1,2,3],2 -> [1,2]; [1,2,3].-1 -> 3
+  def take([head | _], 0), do: head
+  def take([_ | tail], index), do: take(tail, index-1)
+  # store list of popped off nodes
+  # at end: match empty tail and then pop off ndoes from the cache in reverse
 end
