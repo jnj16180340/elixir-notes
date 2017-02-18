@@ -34,7 +34,7 @@ defmodule MyList do
   def span(from,to), do: [from | span(from+1,to)]
   
   @exercise "ListAndRecursion-5"
-  @purpose "Implement Enum functions (no libraries nor comprehensions==loops): *all?, each, filter, split, take"
+  @purpose "Implement Enum functions (no libraries nor comprehensions==loops): *all?, *each, filter, split, *take"
   # all(enum, fun): true if fun(e) for all e in enum
   # 0 is considered "true"
   # need a header for default args
@@ -60,4 +60,8 @@ defmodule MyList do
   def count([head|tail]), do: _count([head|tail],0)
   defp _count([head|[]], acc), do: acc+1
   defp _count([head|tail],acc), do: _count(tail, acc+1)
+  # filter(enum, fun) -> returns only those elements for which fun returns
+  
+  # split(enumerable, count) -> Splits the enumerable into two enumerables, leaving count elements in the first one.
+  # If count is a negative number, it starts counting from the back to the beginning of the enumerable (2x memory)
 end
