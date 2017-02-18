@@ -54,7 +54,10 @@ defmodule MyList do
   end
   # take/2: [1,2,3],2 -> [1,2]; [1,2,3].-1 -> 3
   def take([head | _], 0), do: head
+  def take([head | tail], index) when index<0, do: take([head|tail], count([head|tail])+index)
   def take([_ | tail], index), do: take(tail, index-1)
-  # store list of popped off nodes
-  # at end: match empty tail and then pop off ndoes from the cache in reverse
+  # it's easier to implement take using a count helper fn instead of 4 param _take
+  def count([head|tail]), do: _count([head|tail],0)
+  defp _count([head|[]], acc), do: acc+1
+  defp _count([head|tail],acc), do: _count(tail, acc+1)
 end
