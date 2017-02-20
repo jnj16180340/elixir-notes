@@ -61,6 +61,19 @@ defmodule MyList do
   defp _count([head|[]], acc), do: acc+1
   defp _count([head|tail],acc), do: _count(tail, acc+1)
   # filter(enum, fun) -> returns only those elements for which fun returns
+  def filter([head | []], func) do
+    if func.(head) do
+      [head]
+    end
+  end
+  def filter([head|tail], func) do
+    #piff
+    if func.(head) do
+      [head | filter(tail, func)]
+    else
+      filter(tail, func)
+    end
+  end
   
   # split(enumerable, count) -> Splits the enumerable into two enumerables, leaving count elements in the first one.
   # If count is a negative number, it starts counting from the back to the beginning of the enumerable (2x memory)
