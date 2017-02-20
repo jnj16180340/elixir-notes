@@ -86,4 +86,13 @@ defmodule MyList do
   defp _split([head|tail],{l1,l2}, c) when c>0, do: _split(tail,{[head|l1],l2},c-1)
   defp _split([head|tail],{l1,l2}, c) when c==0, do: _split(tail,{l1, [head|l2]}, c)
   
+  @exercise "ListsAndRecursion-6"
+  @purpose "flatten: flattens an arbitrarily nested list :("
+  # There aren't easy ways to do this without building an intermediate list,
+  # SEE https://forums.pragprog.com/forums/322/topics/11936
+  # If we are allowed to use `++` (ineffficient!!)
+  #def flatten([head|[]]) when is_list(head), do: flatten(head) # empiricallyunnecessary
+  def flatten([head|[]]), do: flatten(head)
+  def flatten([head|tail]), do: flatten(head) ++ flatten(tail)
+  def flatten(h), do: [h]  
 end
