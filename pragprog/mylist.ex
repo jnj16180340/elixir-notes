@@ -58,8 +58,8 @@ defmodule MyList do
   def take([_ | tail], index), do: take(tail, index-1)
   # it's easier to implement take using a count helper fn instead of 4 param _take
   def count([head|tail]), do: _count([head|tail],0)
-  defp _count([head|[]], acc), do: acc+1
-  defp _count([head|tail],acc), do: _count(tail, acc+1)
+  defp _count([_head|[]], acc), do: acc+1
+  defp _count([_head|tail],acc), do: _count(tail, acc+1)
   # filter(enum, fun) -> returns only those elements for which fun returns
   def filter([head | []], func) do
     if func.(head) do
@@ -67,14 +67,23 @@ defmodule MyList do
     end
   end
   def filter([head|tail], func) do
-    #piff
     if func.(head) do
       [head | filter(tail, func)]
     else
       filter(tail, func)
     end
   end
-  
   # split(enumerable, count) -> Splits the enumerable into two enumerables, leaving count elements in the first one.
-  # If count is a negative number, it starts counting from the back to the beginning of the enumerable (2x memory)
+  # is it possible to do without reversing the list?
+  def reverse([head|tail]), do: _reverse([head|tail],[])
+  defp _reverse([oh|[]], nl), do: [oh|nl] 
+  defp _reverse([oh|ot], nl), do: _reverse(ot, [oh|nl]) 
+  
+  def split([head|tail], c) when c<0, do: _split([head|tail],{[],[]},count([head|tail])+c)
+  def split([head|tail], c), do: _split([head|tail],{[],[]},c)
+  defp _split([head|[]],{l1,l2}, c) when c>0, do: {reverse([head|l1]),reverse(l2)}
+  defp _split([head|[]],{l1,l2}, c) when c==0, do: {reverse(l1), reverse([head|l2])}
+  defp _split([head|tail],{l1,l2}, c) when c>0, do: _split(tail,{[head|l1],l2},c-1)
+  defp _split([head|tail],{l1,l2}, c) when c==0, do: _split(tail,{l1, [head|l2]}, c)
+  
 end
