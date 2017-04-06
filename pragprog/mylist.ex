@@ -95,4 +95,40 @@ defmodule MyList do
   def flatten([head|[]]), do: flatten(head)
   def flatten([head|tail]), do: flatten(head) ++ flatten(tail)
   def flatten(h), do: [h]  
+  
+  @exercise "ListsAndRecursion-7"
+  @purpose "Use span() + list comprehensions to return prime numbers"
+  defp snap(a,b), do: a..b |> Enum.to_list
+  # tHIS IS I THINK IMPOSSIBBLE TO DO AS PURE generator+filter
+  # unless we use `--` and find nonprimes
+  
+  @exercise "ListsAndRecursion-8"
+  @purpose "insertinf fields n stuff"
+  # We can't export variables from modules directly, although we could define as
+  # @module_attribute and def getter, do: @module_attribute
+  # But, the idiomatic way is to think in functions not variables
+  def tax_rates, do: [ NC: 0.075, TX: 0.08 ]
+  def orders, do: [
+      [ id: 123, ship_to: :NC, net_amount: 100.00 ],
+      [ id: 124, ship_to: :OK, net_amount: 35.50 ],
+      [ id: 125, ship_to: :TX, net_amount: 24.00 ],
+      [ id: 126, ship_to: :TX, net_amount: 44.80 ],
+      [ id: 127, ship_to: :NC, net_amount: 25.00 ],
+      [ id: 128, ship_to: :MA, net_amount: 10.00 ],
+      [ id: 129, ship_to: :CA, net_amount: 102.00 ],
+      [ id: 130, ship_to: :NC, net_amount: 50.00 ]
+    ]
+  # Keyword.update: updates keywords with f(value) OR initial
+  # f = nil is okay when key never exists; but identity is safer == &(&1))
+  # i guess nil is good for catching problems early
+  # Or, use Keyword.put/3 which is better (or put_new which doesn't overwrite)
+  # Interestingly, update adds to tail, put adds to head
+  def nil2zero(nil), do: 0
+  def nil2zero(v), do: v
+  #for li <- MyList.orders, do: Keyword.update(li, :piff, 420, nil)
+  def calctaxes do
+    for li <- MyList.orders do 
+      Keyword.put(li, :total, li[:net_amount]*(1+nil2zero(tax_rates[li[:ship_to]])))
+    end
+  end
 end
