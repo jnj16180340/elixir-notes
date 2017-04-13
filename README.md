@@ -34,7 +34,8 @@ REPL: `iex`
 - "Invisible" distributed-ness: Processes are 'location agnostic' apart from bare-metal differences and network latency
 - "Pipeline" syntax
         - `f |> g(y) |> h(y,z)` == `h(g(f(),y),y,z)`
-- Dealing with binary streams and regex-like stuff is really easy
+- Dealing with binary streams and regex-like stuff is "really easy"
+        - It's not
         - EXAMPLES
 - Soft realtime
     - Explain what this means
@@ -75,6 +76,15 @@ REPL: `iex`
     - it's technically possible
 - Import module functions in the smallest possible scope
     - Even in function defs!
+- Functions should be short, flow control is code smell
+    - prefer pattern matching, guard clauses
+- List reversal basically isn't a performance hit
+    - It's highly optimized for obvious reasons
+- Exceptions should be "truly exceptional"
+    - ex. database is down, etc.
+    - not user enters wrong url, etc.
+    - Generally, errors propagate to a supervising process and the error-ing process dies
+    - SO, exceptions should *rarely* be caught/handled!
     
 
 Syntax for definition/lookup of Enumerable types can be a bit weird. Pick a style and stick to it
