@@ -1,4 +1,6 @@
 defmodule ControlFlow do
+    @testint 69
+    @teststr "four twenty"
     @exercise "ControlFlow-1"
     # FizzBuzz using case
     

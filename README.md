@@ -23,6 +23,12 @@ Static checker: `dialyzer` (for BEAM bytecode, generated Erlang code)
 REPL: `iex`
 
 ### Features
+- REPL with very nice built-in help
+    - Fill out `@moduledoc`/`@doc` and your own code will be help-able in REPL
+- Project tooling encourages good practice
+    - Documentation is a first-class citizen
+    - Built-in testing support from `mix`
+    - `mix` is basically `npm` with added features: tests, config files, documentation etc.
 - Robustness: 
     - 30 years of Erlang (BEAM VM) and OTP (standard library for "telephony")
     - Used in cell networks, Whatsapp, big companies
@@ -42,6 +48,8 @@ REPL: `iex`
 - More...
 
 ### Differences and caveats
+- There's a fuckton of syntactic sugar
+    - If you *truly* understand it, all the syntax (`, do:` vs `do...end`, etc.) is internally consistent
 - Types+syntax can be a little bit weird
     - **But at least they're not schizophrenic!** 
     - Pick a style and stick to it
